@@ -35,7 +35,7 @@ jobs:
                   config-name: release-drafter-config.yml
                   disable-autolabeler: true
                   prerelease: true
-                  prerelease-identifier: 'rc' # prerelease x.x.x-rc.x
+                  prerelease-identifier: rc   # prerelease x.x.x-rc.x
                   publish: true
                   version: ${{ steps.version.outputs.version }}
               env:
