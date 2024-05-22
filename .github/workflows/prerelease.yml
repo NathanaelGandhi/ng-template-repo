@@ -11,7 +11,7 @@ permissions:
     contents: read
 
 jobs:
-    prerelease:
+    publish_prerelease:
         permissions:
             # write permission is required to create a github release
             contents: write
