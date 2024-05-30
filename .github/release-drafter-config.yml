@@ -91,7 +91,6 @@ version-resolver:
             - chore
             - ci
             - dependencies
-            - deploy
             - documentation
             - fix
             - refactor
