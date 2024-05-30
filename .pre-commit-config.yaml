@@ -62,3 +62,10 @@ repos:
             args: [--style=file]
             types_or: [c++, c, cuda]
             require_serial: true
+    - repo: https://github.com/pocc/pre-commit-hooks
+      rev: v1.3.5
+      hooks:
+          - id: clang-tidy
+            args: [-checks=* -warnings-as-errors=*]
+          - id: cppcheck
+            args: [--addon=misra.py]
