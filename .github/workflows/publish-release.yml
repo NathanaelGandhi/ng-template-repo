@@ -1,17 +1,17 @@
 ---
-name: Prerelease
+name: Publish Release
 
 on:
     push:
         branches:
-            - prerelease
+            - release
     workflow_dispatch:
 
 permissions:
     contents: read
 
 jobs:
-    publish_prerelease:
+    publish_release:
         permissions:
             # write permission is required to create a github release
             contents: write
@@ -34,8 +34,7 @@ jobs:
               with:
                   config-name: release-drafter-config.yml
                   disable-autolabeler: true
-                  prerelease: true
-                  prerelease-identifier: rc   # prerelease x.x.x-rc.x
+                  prerelease: false
                   publish: true
                   version: ${{ steps.version.outputs.version }}
               env:
