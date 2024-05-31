@@ -24,7 +24,7 @@ categories:
           - refactor
           - style
           - test
-    - title: ⬆️ Dependencies
+    - title: Dependencies
       collapse-after: 5
       labels:
           - dependencies
@@ -91,7 +91,6 @@ version-resolver:
             - chore
             - ci
             - dependencies
-            - deploy
             - documentation
             - fix
             - refactor
