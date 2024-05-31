@@ -69,3 +69,19 @@ repos:
             args: [-checks=* -warnings-as-errors=*]
           - id: cppcheck
             args: [--addon=misra.py]
+
+    - repo: local
+      hooks:
+        - id: cppcheck-changed-lines
+          name: cppcheck on changed lines
+          entry: bash -c 'git diff --cached -U0 | diff-filter -i | xargs cppcheck --addon=misra.py'
+          language: system
+          files: \.(c|cpp|h|hpp)$
+          stages: [commit]
+
+        - id: clang-tidy-changed-lines
+          name: clang-tidy on changed lines
+          entry: bash -c 'git diff --cached -U0 | diff-filter -i | xargs clang-tidy'
+          language: system
+          files: \.(c|cpp|h|hpp)$
+          stages: [commit]
