@@ -1,10 +1,10 @@
 ---
-name: Publish Prerelease
+name: Publish Release Candidate
 
 on:
     push:
         branches:
-            - prerelease
+            - release-candidate
     workflow_dispatch:
 
 permissions:
