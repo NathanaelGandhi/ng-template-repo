@@ -11,7 +11,7 @@ permissions:
     contents: read
 
 jobs:
-    publish_prerelease:
+    publish_release_beta:
         permissions:
             # write permission is required to create a github release
             contents: write
@@ -30,7 +30,9 @@ jobs:
                   echo "version=${version}" >> $GITHUB_OUTPUT
                   echo "major=${major}" >> $GITHUB_OUTPUT
 
-            - uses: release-drafter/release-drafter@v6
+            - name: create release
+              id: create_release
+              uses: release-drafter/release-drafter@v6
               with:
                   config-name: release-drafter-config.yml
                   disable-autolabeler: true
@@ -40,3 +42,17 @@ jobs:
                   version: ${{ steps.version.outputs.version }}
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - uses: actions/checkout@v4 # if not previously run
+            - name: test artifact
+              id: test_artifact
+              if: success()
+              run: |
+                  echo "${{ steps.create_release.outputs.tag_name }}" >> tag.txt
+            - name: upload release assets
+              id: upload-release-assets
+              if: success()
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  FILES: tag.txt # space separated list of files to upload
+              run: |
+                  gh release upload --clobber ${{ steps.version.outputs.version }} ${{ env.FILES }}
